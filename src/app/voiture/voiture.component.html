@@ -1,0 +1,74 @@
+
+<div class="container mt-5">
+  <div class="card mt-3" *ngFor="let voiture of voitures">
+    <div class="card-header">
+      <h5>{{voiture.nom}}</h5>
+    </div>
+    <div class="card-body ">
+      <p class="card-text"> Kilometrage : <span>{{ voiture.kilometrage | number:'':'fr' }}</span></p>
+      <p class="card-text"> Immatriculation : {{voiture.immatriculation}}</p>
+        <div class="row m-3">
+          <button class="btn btn-success col-1" (click)="modifierVoiture(voiture)"><fa-icon [icon]="faEdit"></fa-icon></button>
+          <div class='col-1'></div>
+          <button class="btn btn-success col-1" (click)="deleteVoiture(voiture.id)"><fa-icon [icon]="faTrash"></fa-icon></button>
+          <div class='col-6'></div>
+          <button class="btn btn-success col-2" (click)="voirContrats(voiture)" routerLink="/contrat">Mes contrats</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <button type="submit" class="btn btn-success ml-3" (click)="afficherForm()">Créer un nouveau véhicule</button>
+</div>
+
+<div class="container">
+  <div *ngIf="affichageVoitureForm">
+      <h3 class="mt-5 mb-1 ml-3">Ajouter un véhicule</h3>
+      <form class="ml-3" [formGroup]="voitureForm">
+          <div class="form-group" >
+          <label for="nom">Nom de votre véhicule :</label>
+          <input type="text" class="form-control" id="nom" formControlName="nom" required>
+          </div>
+          <div class="form-group">
+              <label for="niveau">Kilometrage :</label>
+              <input type="text" class="form-control" id="kilometrage" formControlName="kilometrage">
+          </div>
+          <div class="form-group">
+              <label for="niveau">Immatriculation :</label>
+              <input type="text" class="form-control" id="immatriculation" formControlName="immatriculation">
+          </div>  
+          <div class="row d-flex justify-content-around mt-2">
+              <button type="submit" class="btn btn-success col-3 ml-2" (click)="enregistrer()">Enregistrer</button>
+              <button type="submit" class="btn btn-success col-3" (click)="annulerForm()">Annuler</button>
+          </div>
+      </form>
+  </div>
+</div>
+
+<div class="container">
+  <div *ngIf="affichageModifierVoitureForm">
+      <h3 class="mt-5 mb-1 ml-3">Modifier votre véhicule</h3>
+      <form class="ml-3" [formGroup]="voitureForm">
+          <div class="form-group" >
+          <label for="nom">Nom de votre véhicule :</label>
+          <input type="text" class="form-control" id="nom" formControlName="nom" required>
+          </div>
+          <div class="form-group">
+              <label for="niveau">Kilometrage :</label>
+              <input type="text" class="form-control" id="kilometrage" formControlName="kilometrage">
+          </div>
+          <div class="form-group">
+              <label for="niveau">Immatriculation :</label>
+              <input type="text" class="form-control" id="immatriculation" formControlName="immatriculation">
+          </div>  
+          <div class="row d-flex justify-content-around mt-2">
+              <button type="submit" class="btn btn-success col-3 ml-2" (click)="updateVoiture(voiture.id)">Enregistrer</button>
+              <button type="submit" class="btn btn-success col-3" (click)="annulerForm()">Annuler</button>
+          </div>
+      </form>
+  </div>
+</div>
+
+
+

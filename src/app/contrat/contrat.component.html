@@ -1,0 +1,117 @@
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="card col-3 ">
+            <div class="card-header" id="titre">
+            {{voiture.nom}}
+            </div>
+            <div class="card-body ">
+            <p class="card-text"> Kilometrage : <span>{{ voiture.kilometrage }}</span></p>
+            <p class="card-text"> Immatriculation : {{voiture.immatriculation}}</p>
+            </div>                
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-around">
+        <div class="card col-3 " *ngFor="let contrat of contrats">
+            <div class="card-header">
+            {{contrat.nom}}
+            </div>
+            <div class="card-body ">
+            <p class="card-text"> Date de creation : {{contrat.dateCreation}}</p>
+            <p class="card-text"> Prix : {{contrat.prix}} €€</p>
+            <p class="card-text"> Prestataire : {{contrat.nomPrestataire}}</p>
+            <p class="card-text"> modele : {{contrat.modele}}</p>
+            <p class="card-text"> commentaire : {{contrat.commentaire}}</p>
+            </div>
+            <div class="row d-flex justify-content-around">
+                <button class="btn btn-success col-4" (click)="deleteContrat(contrat.id)">supprimer</button>
+                <button class="btn btn-success col-4" (click)="modifierContrat(contrat)">modifier</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="row d-flex mt-2">
+    <button type="submit" class="btn btn-success col-2" (click)="afficherForm()">Créer</button>
+    <button type="submit" class="btn btn-success col-2 mt-2 ml-3" routerLink="/voiture">Retour Voiture</button>
+</div>
+
+
+<div class="container">
+    <div *ngIf="affichageContratForm">
+        <h3 class="mt-5 mb-1 ml-3">Ajouter un contrat</h3>
+        <form class="ml-3" [formGroup]="contratForm">
+            <div class="form-group" >
+            <label for="nom">Nom de votre contrat :</label>
+            <input type="text" class="form-control" id="nom" formControlName="nom" required>
+            </div>
+            <label for="produit" required>Choisissez votre produit :</label>
+                <select class="form-select" formControlName="produit">
+                    <option [ngValue]=""></option>
+                    <option *ngFor="let produit of produits" name="produit" [ngValue]="produit.id" >{{produit.libelle}}</option>
+                </select>
+            <div class="form-group">
+                <label for="niveau">Modele du produit :</label>
+                <input type="text" class="form-control" id="modele" formControlName="modele">
+            </div>
+            <div class="form-group">
+                <label for="niveau">Nom du prestataire :</label>
+                <input type="text" class="form-control" id="nomPrestataire" formControlName="nomPrestataire">
+            </div>
+            <div class="form-group">
+                <label for="niveau">Prix :</label>
+                <input type="text" class="form-control" id="prix" formControlName="prix" required>
+            </div>
+            <div class="form-group">
+                <label for="niveau">Commentaire :</label>
+                <input type="text" class="form-control" id="commentaire" formControlName="commentaire" required>
+            </div>
+            <div class="row d-flex justify-content-around mt-2">
+                <button type="submit" class="btn btn-success col-3 ml-2" (click)="enregistrer()">Enregistrer</button>
+                <button type="submit" class="btn btn-success col-3" (click)="annulerForm()">Annuler</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div *ngIf="affichageModifierContratForm">
+        <h3 class="mt-5 mb-1 ml-3">Modifier un contrat</h3>
+        <form class="ml-3" [formGroup]="contratForm">
+            <div class="form-group" >
+            <label for="nom">Nom de votre contrat :</label>
+            <input type="text" class="form-control" id="nom" formControlName="nom" required>
+            </div>
+            <label for="produit" required>Choisissez votre produit :</label>
+                <select class="form-select" formControlName="produit">
+                    <option [ngValue]=""></option>
+                    <option *ngFor="let produit of produits" name="produit" [ngValue]="produit.id" >{{ produit.libelle }}</option>
+                </select>
+            <div class="form-group">
+                <label for="niveau">Modele du produit :</label>
+                <input type="text" class="form-control" id="modele" formControlName="modele">
+            </div>
+            <div class="form-group">
+                <label for="niveau">Nom du prestataire :</label>
+                <input type="text" class="form-control" id="nomPrestataire" formControlName="nomPrestataire">
+            </div>
+            <div class="form-group">
+                <label for="niveau">Prix :</label>
+                <input type="text" class="form-control" id="prix" formControlName="prix" required>
+            </div>
+            <div class="form-group">
+                <label for="niveau">Commentaire :</label>
+                <input type="text" class="form-control" id="commentaire" formControlName="commentaire" required>
+            </div>
+            <div class="row d-flex justify-content-around mt-2">
+                <button type="submit" class="btn btn-success col-3 ml-2" (click)="enregistrer()">Enregistrer</button>
+                <button type="submit" class="btn btn-success col-3" (click)="annulerForm()">Annuler</button>
+            </div>
+        </form>
+    </div>
+</div>

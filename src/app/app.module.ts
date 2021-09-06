@@ -3,16 +3,33 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VoitureComponent } from './voiture/voiture.component';
+import { ContratComponent } from './contrat/contrat.component';
+import { DatePipe } from '@angular/common';
+import { HeaderComponent } from './header/header.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    VoitureComponent,
+    ContratComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    [DatePipe]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
