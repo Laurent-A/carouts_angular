@@ -1,5 +1,5 @@
 
-
+<!--Card presentation voiture-->
 <div class="container mt-5">
     <div class="row">
         <div class="card col-3 ">
@@ -14,35 +14,38 @@
     </div>
 </div>
 
+<!--Card presentation contrat-->
 <div class="container mt-5">
-    <div class="row d-flex justify-content-around">
-        <div class="card col-3 " *ngFor="let contrat of contrats">
-            <div class="card-header">
-            {{contrat.nom}}
-            </div>
-            <div class="card-body ">
-            <p class="card-text"> Date de creation : {{contrat.dateCreation}}</p>
-            <p class="card-text"> Prix : {{contrat.prix}} €€</p>
-            <p class="card-text"> Prestataire : {{contrat.nomPrestataire}}</p>
-            <p class="card-text"> modele : {{contrat.modele}}</p>
-            <p class="card-text"> commentaire : {{contrat.commentaire}}</p>
-            </div>
-            <div class="row d-flex justify-content-around">
-                <button class="btn btn-success col-4" (click)="deleteContrat(contrat.id)">supprimer</button>
-                <button class="btn btn-success col-4" (click)="modifierContrat(contrat)">modifier</button>
-            </div>
-        </div>
-        
+    <div class="card mt-3" *ngFor="let contrat of contrats">
+      <div class="card-header">
+        <h5>{{contrat.nom}}</h5>
+      </div>
+      <div class="card-body ">
+        <p class="card-text"> Date de creation : {{contrat.dateCreation}}</p>
+        <p class="card-text"> Prix : {{contrat.prix}} €</p>
+        <p class="card-text"> Prestataire : {{contrat.nomPrestataire}}</p>
+        <p class="card-text"> modele : {{contrat.modele}}</p>
+        <p class="card-text"> commentaire : {{contrat.commentaire}}</p>
+          <div class="row m-3">
+            <button class="btn btn-success col-1" (click)="modifierContrat(contrat)"><fa-icon [icon]="faEdit"></fa-icon></button>
+            <div class='col-1'></div>
+            <button class="btn btn-success col-1" (click)="deleteContrat(contrat.id)"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <div class='col-6'></div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+<!--Bouton création-->
+<div class="container">
+    <div class="mt-4 row d-flex justify-content-around">
+        <button type="submit" class="btn btn-success col-4" (click)="afficherForm()">Créer un nouveau contrat</button>
+        <button type="submit" class="btn btn-success col-4" routerLink="/voiture">Accueil véhicule</button>
     </div>
 </div>
 
-<div class="row d-flex mt-2">
-    <button type="submit" class="btn btn-success col-2" (click)="afficherForm()">Créer</button>
-    <button type="submit" class="btn btn-success col-2 mt-2 ml-3" routerLink="/voiture">Retour Voiture</button>
-</div>
 
-
-<div class="container">
+<div class="container mb-3">
     <div *ngIf="affichageContratForm">
         <h3 class="mt-5 mb-1 ml-3">Ajouter un contrat</h3>
         <form class="ml-3" [formGroup]="contratForm">
@@ -72,16 +75,16 @@
                 <input type="text" class="form-control" id="commentaire" formControlName="commentaire" required>
             </div>
             <div class="row d-flex justify-content-around mt-2">
-                <button type="submit" class="btn btn-success col-3 ml-2" (click)="enregistrer()">Enregistrer</button>
-                <button type="submit" class="btn btn-success col-3" (click)="annulerForm()">Annuler</button>
+                <button type="submit" class="btn btn-primary col-3 ml-2" (click)="enregistrer()">Enregistrer</button>
+                <button type="submit" class="btn btn-primary col-3" (click)="annulerForm()">Annuler</button>
             </div>
         </form>
     </div>
 </div>
 
-<div class="container">
+<div class="container mb-3">
     <div *ngIf="affichageModifierContratForm">
-        <h3 class="mt-5 mb-1 ml-3">Modifier un contrat</h3>
+        <h3 class="mt-5 mb-1 ml-3">Modifier le contrat : {{ contrat.nom }}</h3>
         <form class="ml-3" [formGroup]="contratForm">
             <div class="form-group" >
             <label for="nom">Nom de votre contrat :</label>
@@ -109,9 +112,10 @@
                 <input type="text" class="form-control" id="commentaire" formControlName="commentaire" required>
             </div>
             <div class="row d-flex justify-content-around mt-2">
-                <button type="submit" class="btn btn-success col-3 ml-2" (click)="enregistrer()">Enregistrer</button>
+                <button type="submit" class="btn btn-success col-3 ml-2" (click)="updateContrat(contrat.id)">Enregistrer</button>
                 <button type="submit" class="btn btn-success col-3" (click)="annulerForm()">Annuler</button>
             </div>
         </form>
     </div>
 </div>
+

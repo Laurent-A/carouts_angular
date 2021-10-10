@@ -35,7 +35,7 @@ export class ContratService {
         return this.httpClient.delete<any>(routes.contrat+'/'+id);
     }
 
-    updateVoiture(contrat:Contrat, id:number): Observable<Contrat>{
+    updateContrat(contrat:Contrat, id:number): Observable<Contrat>{
         return this.httpClient.put<Contrat>(routes.contrat+'/'+id, contrat);
     }
 

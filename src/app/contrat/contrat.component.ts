@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Contrat } from '../modele/contrat';
@@ -6,6 +5,8 @@ import { Produit } from '../modele/produit';
 import { Voiture } from '../modele/voiture';
 import { ContratService } from '../service/contrat.service';
 import { ProduitService } from '../service/produit.service';
+import { faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-contrat',
@@ -23,14 +24,14 @@ export class ContratComponent implements OnInit {
   idVoiture: number;
   affichageContratForm = false;
   submitted = false;
-  maDate = new Date();
   affichageModifierContratForm = false;
+  faTrash = faTrash;
+  faEdit = faEdit;
 
   constructor(
     private formBuilder: FormBuilder,
     private produitService: ProduitService,
     private contratService: ContratService,
-    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -83,7 +84,6 @@ export class ContratComponent implements OnInit {
   }
 
   enregistrer(){
-    
     this.affichageContratForm = false;
     this.onSubmit();
   }
@@ -114,7 +114,6 @@ export class ContratComponent implements OnInit {
   modifierContrat(contrat: Contrat){
     this.contrat = contrat;
     this.contratForm.patchValue(contrat);
-    console.log(this.contratForm);
     this.affichageModifierContratForm = true;
     this.affichageContratForm = false;
   }
@@ -125,4 +124,29 @@ export class ContratComponent implements OnInit {
     this.affichageContratForm = false;
   }
   
+
+  updateContrat(id: number){
+    this.contrat.nom = this.contratForm.get('nom').value;
+    this.contrat.prix = this.contratForm.get('prix').value;
+    this.contrat.produit = this.recupererProduits(this.contratForm.get('produit').value);
+    this.contrat.nomPrestataire = this.contratForm.get('nomPrestataire').value;
+    this.contrat.modele = this.contratForm.get('modele').value;
+    this.contrat.commentaire = this.contratForm.get('commentaire').value;
+    this.contrat.dateCreation = null;
+    this.contratService.updateContrat(this.contrat, id)
+    .subscribe(() => {
+      console.log('Enregistrement terminé !');
+      this.affichageModifierContratForm = false;
+      this.recupererContrat()
+      this.contratForm.reset();
+    },
+    (error) => {
+      console.log('Erreur ! : ' + error);
+      }
+    );
+  }
+
+  recupererProduits(id: number){
+    return this.produits.find(produit => produit.id === id)
+  }
 }
