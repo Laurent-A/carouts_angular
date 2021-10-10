@@ -2,6 +2,7 @@ import { Produit } from "./produit";
 import { Voiture } from "./voiture";
 
 export class Contrat {
+    id: number;
     nom: String;
     dateCreation: String;
     prix: String;
