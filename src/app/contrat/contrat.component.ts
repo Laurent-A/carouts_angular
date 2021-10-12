@@ -6,6 +6,7 @@ import { Voiture } from '../modele/voiture';
 import { ContratService } from '../service/contrat.service';
 import { ProduitService } from '../service/produit.service';
 import { faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -27,12 +28,21 @@ export class ContratComponent implements OnInit {
   affichageModifierContratForm = false;
   faTrash = faTrash;
   faEdit = faEdit;
+  contratModal: Contrat;
+  
+
+  greeting: Promise<string>|null = null;
+  arrived: boolean = false;
+
+  private resolve: Function|null = null;
 
   constructor(
     private formBuilder: FormBuilder,
     private produitService: ProduitService,
     private contratService: ContratService,
-  ) {}
+  ) {
+    this.reset();
+  }
 
   ngOnInit() {
     this.produitService.getProduits().subscribe(listeProduits => (this.produits)= listeProduits);
@@ -149,4 +159,27 @@ export class ContratComponent implements OnInit {
   recupererProduits(id: number){
     return this.produits.find(produit => produit.id === id)
   }
+
+  ouvertureModale(id: number){
+    
+    console.log(this.contratModal);
+  }
+
+  reset() {
+    this.arrived = false;
+    this.greeting = new Promise<string>((resolve, reject) => {
+      this.resolve = resolve;
+    });
+  }
+
+  clicked(id: number) {
+    if (this.arrived) {
+      this.reset();
+    } else {
+      this.resolve!('hi there!');
+      this.contratModal = this.contrats.find(x => x.id === id);
+    }
+    console.log(this.arrived)
+  }
+  
 }

@@ -1,7 +1,6 @@
 
 <!--Card presentation voiture-->
 <div class="container mt-5">
-    <div class="row">
         <div class="card col-3 ">
             <div class="card-header" id="titre">
             {{voiture.nom}}
@@ -11,27 +10,26 @@
             <p class="card-text"> Immatriculation : {{voiture.immatriculation}}</p>
             </div>                
         </div>
-    </div>
 </div>
 
 <!--Card presentation contrat-->
-<div class="container mt-5">
-    <div class="card mt-3" *ngFor="let contrat of contrats">
-      <div class="card-header">
-        <h5>{{contrat.nom}}</h5>
-      </div>
-      <div class="card-body ">
-        <p class="card-text"> Date de creation : {{contrat.dateCreation}}</p>
-        <p class="card-text"> Prix : {{contrat.prix}} €</p>
-        <p class="card-text"> Prestataire : {{contrat.nomPrestataire}}</p>
-        <p class="card-text"> modele : {{contrat.modele}}</p>
-        <p class="card-text"> commentaire : {{contrat.commentaire}}</p>
-          <div class="row m-3">
-            <button class="btn btn-success col-1" (click)="modifierContrat(contrat)"><fa-icon [icon]="faEdit"></fa-icon></button>
-            <div class='col-1'></div>
-            <button class="btn btn-success col-1" (click)="deleteContrat(contrat.id)"><fa-icon [icon]="faTrash"></fa-icon></button>
-            <div class='col-6'></div>
-          </div>
+  <div class="container mt-5">
+    <div class="card mt-3" *ngFor="let contrat of contrats"data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="clicked(contrat.id)">
+      <div class="card-header row d-flex ">
+        <ul class="nav nav-pills justify-content-around">
+            <li class="nav-item col-2" >
+                <p>{{contrat.nom}}</p>
+            </li>
+            <li class="nav-item col-1">
+            </li>
+            <li class="nav-item col-4">
+                <p>Date de création : {{contrat.dateCreation}}</p>
+            </li>
+            <li class="nav-item col-1"></li>
+            <li class="nav-item col-2">
+                <p> Prix : {{contrat.prix}} €</p>
+            </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -75,8 +73,8 @@
                 <input type="text" class="form-control" id="commentaire" formControlName="commentaire" required>
             </div>
             <div class="row d-flex justify-content-around mt-2">
-                <button type="submit" class="btn btn-primary col-3 ml-2" (click)="enregistrer()">Enregistrer</button>
-                <button type="submit" class="btn btn-primary col-3" (click)="annulerForm()">Annuler</button>
+                <button type="submit" class="btn btn-success col-3 ml-2" (click)="enregistrer()">Enregistrer</button>
+                <button type="submit" class="btn btn-success col-3" (click)="annulerForm()">Annuler</button>
             </div>
         </form>
     </div>
@@ -119,3 +117,24 @@
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ contratModal.nom }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul>
+              <li>{{ contratModal.produit.libelle }}</li>
+              <li>{{ contratModal.prix }}</li>
+          </ul>    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Merci</button>
+        </div>
+      </div>
+    </div>
+  </div>
