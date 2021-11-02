@@ -14,23 +14,18 @@
 
 <!--Card presentation contrat-->
   <div class="container mt-5">
-    <div class="card mt-3" *ngFor="let contrat of contrats"data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="clicked(contrat.id)">
-      <div class="card-header row d-flex ">
-        <ul class="nav nav-pills justify-content-around">
-            <li class="nav-item col-2" >
+    <div class="card mt-2 pt-3" *ngFor="let contrat of contrats">
+        <ul class="row justify-content-around ">
+            <li class="col-3" >
                 <p>{{contrat.nom}}</p>
             </li>
-            <li class="nav-item col-1">
-            </li>
-            <li class="nav-item col-4">
+            <li class="col-3">
                 <p>Date de création : {{contrat.dateCreation}}</p>
             </li>
-            <li class="nav-item col-1"></li>
-            <li class="nav-item col-2">
+            <li class="col-3">
                 <p> Prix : {{contrat.prix}} €</p>
             </li>
         </ul>
-      </div>
     </div>
   </div>
 
@@ -41,6 +36,8 @@
         <button type="submit" class="btn btn-success col-4" routerLink="/voiture">Accueil véhicule</button>
     </div>
 </div>
+
+
 
 
 <div class="container mb-3">
@@ -116,25 +113,3 @@
         </form>
     </div>
 </div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ contratModal.nom }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <ul>
-              <li>{{ contratModal.produit.libelle }}</li>
-              <li>{{ contratModal.prix }}</li>
-          </ul>    
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Merci</button>
-        </div>
-      </div>
-    </div>
-  </div>

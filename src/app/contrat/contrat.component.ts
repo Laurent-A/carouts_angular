@@ -6,7 +6,7 @@ import { Voiture } from '../modele/voiture';
 import { ContratService } from '../service/contrat.service';
 import { ProduitService } from '../service/produit.service';
 import { faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 
 @Component({
@@ -44,7 +44,7 @@ export class ContratComponent implements OnInit {
     this.reset();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.produitService.getProduits().subscribe(listeProduits => (this.produits)= listeProduits);
     this.recupererVoiture();
     this.recupererContrat();

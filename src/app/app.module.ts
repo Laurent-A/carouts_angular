@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './footer/footer.component';
+import { DataTablesModule } from 'angular-datatables';
+
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { FooterComponent } from './footer/footer.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DataTablesModule
   ],
   providers: [
     [DatePipe]
